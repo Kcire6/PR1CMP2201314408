@@ -1,0 +1,91 @@
+package AnalizadorCJS;
+import java_cup.runtime.Symbol;
+import Tools.DatosExtra;
+
+
+/* Preliminaries to set up and use the scanner.  */
+parser code
+{:
+public void syntax_error(Symbol s)
+    {        
+        if(!s.value.equals(null)){
+        DatosExtra n = (DatosExtra)s.value;
+        System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        System.out.println("valor: "+n.lexema);
+        System.out.println("columna: "+ n.columna);
+        System.out.println("fila: "+ n.fila);
+    }}
+:}
+/* Terminals (tokens returned by the scanner). */
+
+terminal  
+VAR,
+ID,     
+PYCOMA,
+DPUNTO,
+TD_TEXTO,
+TD_BOOL,
+TD_NUMBER,
+TD_DATE,
+TD_DATET,
+PARAR,
+PARC,
+SUMA,
+RESTA,
+MULTI,
+DIV,
+POTE,
+MODU,
+ADDIC,
+SUSTRA,
+IGUAL,
+DIF,
+MEN,
+MAY,
+MENI,
+MAYI,
+AND,
+OR,
+NOT,
+LLAVEA,
+LLAVEC,
+COMA,
+CONT,
+PUNTO,
+A_TXT, 
+SI,
+SINO, 
+SELECT,
+CASO,
+DEFEC,
+PARA,
+MIENTRAS,
+DETENER,
+IMPRI,
+FUNC,
+RETOR,
+MENS,
+LISTO,
+MODIF,
+CLICK,
+OBTENER, 
+SETEL,
+OBSER
+ ;      
+
+/* Non terminals */
+
+non terminal CJS_DOCUMENT,TDATO,DECLARACION_V,SENTENCIA;
+
+/* Precedences */
+
+/* The grammar */
+start with CJS_DOCUMENT;
+
+CJS_DOCUMENT ::= SENTENCIA;
+
+SENTENCIA ::= DECLARACION_V;
+
+DECLARACION_V ::= VAR ID PYCOMA;
+
+TDATO ::= ID | TD_TEXTO | TD_BOOL|TD_NUMBER|TD_DATE | TD_DATET;
